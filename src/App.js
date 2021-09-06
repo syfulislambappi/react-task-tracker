@@ -18,20 +18,20 @@ function App() {
   }, [])
 
 const onDelete = async (id) => {
-  await fetch(`http://localhost:4000/tasks/${id}`, {method: 'DELETE'})
+  await fetch(`https://react-task-tracker-101.herokuapp.com/api/tasks/${id}`, {method: 'DELETE'})
   setTasks(tasks.filter(task => task.id !== id))
 }
 
 // Fetch Tasks
 const fetchTasks = async () => {
-  const res = await fetch('http://localhost:4000/tasks')
+  const res = await fetch('https://react-task-tracker-101.herokuapp.com/api/tasks')
   const data = await res.json()
   return data
 }
 
 // Fetch Tasks
 const fetchTask = async (id) => {
-  const res = await fetch(`http://localhost:4000/tasks/${id}`)
+  const res = await fetch(`https://react-task-tracker-101.herokuapp.com/api/tasks/${id}`)
   const data = await res.json()
   return data
 }
@@ -40,7 +40,7 @@ const fetchTask = async (id) => {
 const addTask = async task => {
   const id = Math.floor(Math.random() * 10000) + 1
   const newTask = {id, ...task}
-  const res = await fetch('http://localhost:4000/tasks', {
+  const res = await fetch('https://react-task-tracker-101.herokuapp.com/api/tasks', {
     method: 'POST',
     headers: {'Content-type': 'application/json'},
     body: JSON.stringify(newTask)
@@ -52,7 +52,7 @@ const addTask = async task => {
 const toggleReminder = async id => {
   const taskToToggle = await fetchTask(id)
   const updatedTask = {...taskToToggle, reminder: !taskToToggle.reminder}
-  const res = await fetch(`http://localhost:4000/tasks/${id}`, {
+  const res = await fetch(`https://react-task-tracker-101.herokuapp.com/api/tasks/${id}`, {
     method: 'PUT',
     headers: {'Content-type': 'application/json'},
     body: JSON.stringify(updatedTask)
